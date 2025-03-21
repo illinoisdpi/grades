@@ -19,6 +19,7 @@ gem "bootsnap", require: false
 gem "importmap-rails"
 gem "jbuilder"
 gem "kamal", require: false
+gem "lti_provider_engine", require: "lti_provider"
 gem "propshaft"
 gem "puma", ">= 5.0"
 gem "rails", "~> 8.0.2"

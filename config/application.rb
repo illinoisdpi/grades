@@ -23,5 +23,9 @@ module LtiProviderExample
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    #
+
+    # TODO: so lti_provider_engine works with rails 8
+    config.active_record.default_column_serializer = JSON
   end
 end

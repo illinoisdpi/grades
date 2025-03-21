@@ -112,12 +112,17 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hashie (5.0.0)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.1.0)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
+    ims-lti (1.2.9)
+      builder (>= 1.0, < 4.0)
+      oauth (>= 0.4.5)
+      rexml
     io-console (0.8.0)
     irb (1.15.1)
       pp (>= 0.6.0)
@@ -144,6 +149,9 @@ GEM
     loofah (2.24.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
+    lti_provider_engine (1.2.3)
+      ims-lti (~> 1.2)
+      rails (>= 4.2)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -183,6 +191,12 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.5-x86_64-linux-musl)
       racc (~> 1.4)
+    oauth (1.1.0)
+      oauth-tty (~> 1.0, >= 1.0.1)
+      snaky_hash (~> 2.0)
+      version_gem (~> 1.1)
+    oauth-tty (1.0.5)
+      version_gem (~> 1.1, >= 1.1.1)
     ostruct (0.6.1)
     parallel (1.26.3)
     parser (3.3.7.2)
@@ -285,6 +299,9 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    snaky_hash (2.0.1)
+      hashie
+      version_gem (~> 1.1, >= 1.1.1)
     solid_cable (3.0.7)
       actioncable (>= 7.2)
       activejob (>= 7.2)
@@ -334,6 +351,7 @@ GEM
     unicode-emoji (4.0.4)
     uri (1.0.3)
     useragent (0.16.11)
+    version_gem (1.1.6)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -367,6 +385,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  lti_provider_engine
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.2)

@@ -3,6 +3,11 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # TODO: handle ngrok in a better way
+  config.hosts << /.*\.ngrok-free\.app/
+  # TODO: handle another way for lti_engine
+  config.action_controller.allow_forgery_protection = false
+
   # Make code changes take effect immediately without server restart.
   config.enable_reloading = true
 
