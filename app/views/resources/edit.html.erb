@@ -1,0 +1,8 @@
+<h1>Set Project URL</h1>
+
+<%= form_with model: @resource, url: resource_path(@resource), method: :patch do |f| %>
+  <%= f.label :project_url, "Project URL" %><br>
+  <%= f.text_field :project_url, required: true %><br>
+
+  <%= f.submit "Save" %>
+<% end %>

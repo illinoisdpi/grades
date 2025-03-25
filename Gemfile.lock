@@ -383,6 +383,7 @@ DEPENDENCIES
   capybara
   debug
   importmap-rails
+  ims-lti (~> 1.2)
   jbuilder
   kamal
   lti_provider_engine

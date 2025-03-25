@@ -27,5 +27,8 @@ module LtiProviderExample
 
     # TODO: so lti_provider_engine works with rails 8
     config.active_record.default_column_serializer = JSON
+
+    # Allow cookies in iframes (Canvas LTI launches are often embedded in iframes)
+    config.action_dispatch.cookies_same_site_protection = :none
   end
 end

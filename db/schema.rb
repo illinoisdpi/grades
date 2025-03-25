@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_21_232426) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_24_194741) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -62,8 +62,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_21_232426) do
     t.string "canvas_url"
     t.string "nonce"
     t.text "provider_params"
+    t.string "submission_token"
+    t.integer "resource_id"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.string "context_id", null: false
+    t.string "resource_link_id", null: false
+    t.string "project_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["context_id", "resource_link_id"], name: "index_resources_on_context_id_and_resource_link_id", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
