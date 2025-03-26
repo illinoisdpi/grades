@@ -1,66 +1,68 @@
-<div class="max-w-3xl mx-auto px-6 py-8 bg-white rounded-lg shadow-sm">
-  <h2 class="text-xl font-bold text-gray-900 mb-6">
-    📌 <%= URI.parse(@project_url).path[1..] %>
-  </h2>
+<div class="container my-5">
+  <div>
+    <h2 class="text-xl font-bold text-gray-900 mb-6">
+      📌 <%= URI.parse(@project_url).path[1..] %>
+    </h2>
 
-  <ol class="space-y-6 list-decimal ml-4 text-gray-700">
-    <li>
-      <strong>Fork the project</strong> —
-      <a href="<%= @project_url %>/fork" target="_blank" class="text-blue-600 hover:underline">Click here copy the starter code to your own account.</a><br>
-      <span class="text-sm text-gray-500">
-        Only fork <strong>once</strong> per project. If you already forked, find your project at:
-        <code class="bg-gray-100 p-1 rounded">github.com/your-username/project-name</code>
-      </span>
-    </li>
+    <ol class="space-y-6 list-decimal ml-4 text-gray-700">
+      <li>
+        <strong>Fork the project</strong> —
+        <a href="<%= @project_url %>/fork" target="_blank">Click here copy the starter code to your own account.</a><br>
+        <span class="text-sm text-gray-500">
+          Only fork <strong>once</strong> per project. If you already forked, find your project at:
+          <code class="bg-gray-100 p-1 rounded">github.com/your-username/project-name</code>
+        </span>
+      </li>
 
-    <li>
-      <strong>Set up your Integrated Development Environment</strong> —
-      Create an IDE with which to write and preview your code:
-      <ul class="list-disc ml-4">
-        <li>
-          <a href="https://github.com/codespaces" target="_blank" class="text-blue-600 hover:underline">Codespaces</a><br>
-          <span class="text-sm text-gray-500">If you already opened a codespace, reopen it at:</span><br>
-          <code class="bg-gray-100 p-1 rounded">github.com/codespaces</code>
-        </li>
-      </ul>
-    </li>
+      <li>
+        <strong>Set up your Integrated Development Environment</strong> —
+        Create an IDE with which to write and preview your code:
+        <ul class="list-disc ml-4">
+          <li>
+            <a href="https://github.com/codespaces" target="_blank">Codespaces</a><br>
+            <span class="text-sm text-gray-500">If you already opened a codespace, reopen it at:</span><br>
+            <code class="bg-gray-100 p-1 rounded">github.com/codespaces</code>
+          </li>
+        </ul>
+      </li>
 
-    <li>
-      <strong>Read the lesson</strong> —
-      <a href="#" target="_blank" class="text-blue-600 hover:underline">Click here for the written lesson.</a>
-    </li>
+      <li>
+        <strong>Read the lesson</strong> —
+        <a href="<%= @project_url %>" target="_blank">Click here for the written lesson.</a>
+      </li>
 
-    <li>
-      <strong>Automated feedback</strong> —
-      When you're ready to get feedback, run this in your terminal:
-      <div class="mt-2">
-        <code class="bg-gray-200 p-2 rounded font-mono">grade</code>
+      <li>
+        <strong>Automated feedback</strong> —
+        When you're ready to get feedback, run this in your terminal:
+        <div class="mt-2">
+          <code class="bg-gray-200 p-2 rounded font-mono">grade</code>
+        </div>
+        <p class="text-sm mt-2">
+          You can run <code class="bg-gray-100 p-1 rounded">grade</code> as many times as you like. Only your highest score will be recorded as a grade.
+        </p>
+
+        <p class="mt-3">
+          When asked for your access token, carefully copy and paste:
+        </p>
+
+        <div class="mt-2">
+          <code class="bg-gray-200 p-2 rounded font-mono"><%= @launch.submission_token %></code>
+        </div>
+
+        <p class="text-sm mt-3 text-gray-500">
+          If you used the wrong token, reset by running:
+        </p>
+        <code class="bg-gray-200 p-2 rounded font-mono">grade:reset_token</code>
+      </li>
+    </ol>
+
+    <div class="mt-8">
+      <strong>Current score:</strong> 0.0%
+      <div class="mt-1 bg-gray-200 rounded h-2">
+        <div class="bg-gray-500 rounded h-2" style="width: 0%"></div>
       </div>
-      <p class="text-sm mt-2">
-        You can run <code class="bg-gray-100 p-1 rounded">grade</code> as many times as you like. Only your highest score will be recorded as a grade.
-      </p>
-
-      <p class="mt-3">
-        When asked for your access token, carefully copy and paste:
-      </p>
-
-      <div class="mt-2">
-        <code class="bg-gray-200 p-2 rounded font-mono"><%= @launch.submission_token %></code>
-      </div>
-
-      <p class="text-sm mt-3 text-gray-500">
-        If you used the wrong token, reset by running:
-      </p>
-      <code class="bg-gray-200 p-2 rounded font-mono">grade:reset_token</code>
-    </li>
-  </ol>
-
-  <div class="mt-8">
-    <strong>Current score:</strong> 0.0%
-    <div class="mt-1 bg-gray-200 rounded h-2">
-      <div class="bg-gray-500 rounded h-2" style="width: 0%"></div>
     </div>
   </div>
-</div>
 
-<%= render "builds/list_group", builds: @resource.builds.default_order %>
+  <%= render "builds/list_group", builds: @resource.builds.default_order %>
+</div>
