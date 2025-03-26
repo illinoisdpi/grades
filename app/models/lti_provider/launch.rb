@@ -12,6 +12,13 @@ module LtiProvider
 
     validates :submission_token, presence: true, uniqueness: true
 
+    def passback?
+      provider_params["lis_result_sourcedid"].present? &&
+        provider_params["lis_outcome_service_url"].present?
+    end
+
+    # #
+
     # TODO: move submission token stuff to concern
     before_validation :generate_submission_token, on: :create
 
@@ -27,8 +34,6 @@ module LtiProvider
         break token unless exists?(submission_token: token)
       end
     end
-
-
 
     def self.initialize_from_request(provider, request)
       launch = new
