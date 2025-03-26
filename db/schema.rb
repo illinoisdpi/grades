@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_24_194741) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_26_144056) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -58,6 +61,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_194741) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "builds", force: :cascade do |t|
+    t.bigint "launch_id", null: false
+    t.bigint "resource_id", null: false
+    t.jsonb "test_output"
+    t.text "commit_sha"
+    t.text "username"
+    t.text "reponame"
+    t.text "source"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["launch_id"], name: "index_builds_on_launch_id"
+    t.index ["resource_id"], name: "index_builds_on_resource_id"
+  end
+
   create_table "lti_provider_launches", force: :cascade do |t|
     t.string "canvas_url"
     t.string "nonce"
@@ -79,4 +96,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_194741) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "builds", "lti_provider_launches", column: "launch_id"
+  add_foreign_key "builds", "resources"
 end

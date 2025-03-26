@@ -21,20 +21,19 @@ module LtiProvider
       )
 
       @launch.resource = resource
+
+      # TODO: is this getting saved on first launch?
       @launch.save
 
-      # TODO: use another value?
-      session[:launch_nonce] = @launch.nonce
+       session[:launch_nonce] = @launch.nonce
 
       if instructor?
         if resource.project_url.blank?
-          # TODO: Move launch nonce to session?
           redirect_to main_app.edit_resource_path(resource)
           return
         end
       end
 
-      # Redirect to the resource page
       redirect_to main_app.resource_path(resource)
     end
 

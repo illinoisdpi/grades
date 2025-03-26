@@ -1,23 +1,18 @@
 class BuildsController < ApplicationController
   def create
-    # TODO: create Build model
-    #     belongs_to :launch
-    #     belongs_to :resource
-    #     belongs_to :user
-
-    debugger
-    @launch = LtiProvider::Launch.find_by(submission_token: params[:access_token])
+    launch = LtiProvider::Launch.find_by(submission_token: params[:access_token])
+    resource = launch.resource
+    build = Build.create(build_params.merge({ launch:, resource: }))
 
     render json: {
       success: true,
-      # TODO: redirect to full url
-      url: resource_url(@launch.resource)
+      url: resource_url(build.resource)
     }
   end
 
   private
 
   def build_params
-    params.require(:build).permit(:access_token, :test_output, :commit_sha, :username, :reponame, :source)
+    params.require(:build).permit(:access_token, :commit_sha, :username, :reponame, :source, test_output: {})
   end
 end

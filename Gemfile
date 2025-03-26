@@ -21,6 +21,7 @@ gem "ims-lti", "~> 1.2"
 gem "jbuilder"
 gem "kamal", require: false
 gem "lti_provider_engine", require: "lti_provider" # TODO: remove and replace with custom
+gem "pg", "~> 1.5"
 gem "propshaft"
 gem "puma", ">= 5.0"
 gem "rails", "~> 8.0.2"

@@ -55,10 +55,6 @@
     </li>
   </ol>
 
-  <div class="mt-6">
-    <a href="#" class="text-blue-600 hover:underline text-sm">Click here for the detailed written lesson describing the above steps.</a>
-  </div>
-
   <div class="mt-8">
     <strong>Current score:</strong> 0.0%
     <div class="mt-1 bg-gray-200 rounded h-2">
@@ -66,3 +62,5 @@
     </div>
   </div>
 </div>
+
+<%= render "builds/list_group", builds: @resource.builds.default_order %>

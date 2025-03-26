@@ -1,10 +1,6 @@
 class ResourcesController < ApplicationController
   def show
-    Rails.logger.info("session[:launch_nonce]: #{session[:launch_nonce]}")
-
     @resource = Resource.find(params[:id])
-
-    # TODO: store launch id in session?
     @launch = LtiProvider::Launch.find_by(nonce: session[:launch_nonce])
 
     # The URL can be saved on Resource, set by instructor, or a constant.
@@ -13,6 +9,7 @@ class ResourcesController < ApplicationController
     if @project_url.nil?
       render plain: "Missing Project URL. Please contact course owner."
     elsif @launch.nil?
+      # TODO: fix this bug on first launch
       render plain: "Unable to find launch. Please relaunch from canvas."
     end
   end
@@ -24,7 +21,7 @@ class ResourcesController < ApplicationController
   def update
     @resource = Resource.find(params[:id])
     if @resource.update(resource_params)
-      redirect_to resource_path(@resource, token: params[:token]), notice: "Project URL set!"
+      redirect_to resource_path(@resource), notice: "Project URL set!"
     else
       render :edit
     end

@@ -1,0 +1,15 @@
+<ul class="list-group">
+  <% builds.each do |build| %>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <h5 class="mb-1">Build #<%= build.id %></h5>
+        <p class="mb-1">
+          <strong>Summary:</strong> <%= build.summary_line %>
+        </p>
+        <small class="text-muted">
+          Created at <%= l(build.created_at, format: :short) %>
+        </small>
+      </div>
+    </li>
+  <% end %>
+</ul>

@@ -4,4 +4,7 @@ class Resource < ApplicationRecord
 
   # TODO: validate is a real URL
   validates :project_url, presence: true, allow_blank: true
+
+  # TODO: filter by user
+  has_many :builds
 end
