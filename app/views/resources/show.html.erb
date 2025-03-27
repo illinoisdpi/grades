@@ -64,5 +64,5 @@
     </div>
   </div>
 
-  <%= render "builds/list_group", builds: @resource.builds.default_order %>
+  <%= render "builds/list_group", builds: @resource.builds.for_user(Current.lti_provider_user).default_order %>
 </div>

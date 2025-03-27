@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_26_144056) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_27_222403) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -83,6 +83,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_144056) do
     t.integer "resource_id"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.bigint "lti_provider_user_id"
+    t.index ["lti_provider_user_id"], name: "index_lti_provider_launches_on_lti_provider_user_id"
+  end
+
+  create_table "lti_provider_users", force: :cascade do |t|
+    t.text "canvas_user_id"
+    t.text "lis_person_name_full"
+    t.text "lis_user_id"
+    t.text "lis_person_contact_email_primary"
+    t.text "user_image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["canvas_user_id"], name: "index_lti_provider_users_on_canvas_user_id"
+    t.index ["lis_user_id"], name: "index_lti_provider_users_on_lis_user_id"
   end
 
   create_table "resources", force: :cascade do |t|
@@ -98,4 +112,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_144056) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "builds", "lti_provider_launches", column: "launch_id"
   add_foreign_key "builds", "resources"
+  add_foreign_key "lti_provider_launches", "lti_provider_users"
 end

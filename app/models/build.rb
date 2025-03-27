@@ -1,11 +1,13 @@
 class Build < ApplicationRecord
   belongs_to :launch, class_name: "LtiProvider::Launch"
   belongs_to :resource
-  # has_one :user (through launch?)
+  has_one :user, through: :launch
 
   store_accessor :test_output, :version, :examples, :summary, :summary_line
 
   scope :default_order, -> { order(created_at: :desc) }
+  # TODO: refactor so it only uses launches for this resource
+  scope :for_user, ->(user) { where(launch_id: user.launches.pluck(:id)) }
 
   # passbackable
   after_create :passback_grade
@@ -13,9 +15,6 @@ class Build < ApplicationRecord
   def passback_grade
     return unless launch.present? && launch.passback?
     # TODO: only passback highest grade achieved on this assignment (for user)
-    #
-
-    # TODO: check launch provider_params for lis_result_sourcedid and lis_outcome_service_url
 
     # 1. Initialize the LTI ToolProvider with IMS::LTI
     tool_provider = IMS::LTI::ToolProvider.new(
