@@ -2,6 +2,8 @@ require 'uri'
 
 module LtiProvider
   class Launch < ApplicationRecord
+    include Roleable
+
     belongs_to :resource
 
     validates :canvas_url, :provider_params, :nonce, presence: true

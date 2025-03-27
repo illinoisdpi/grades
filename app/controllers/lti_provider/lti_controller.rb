@@ -27,7 +27,7 @@ module LtiProvider
 
        session[:launch_nonce] = @launch.nonce
 
-      if instructor?
+      if @launch.instructor?
         if resource.project_url.blank?
           redirect_to main_app.edit_resource_path(resource)
           return
@@ -43,13 +43,6 @@ module LtiProvider
           render xml: Launch.xml_config(lti_launch_url)
         end
       end
-    end
-
-    private
-
-    def instructor?
-      roles = @launch.provider_params["roles"] || ""
-      roles.include?("Instructor")
     end
   end
 end
