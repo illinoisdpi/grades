@@ -9,6 +9,9 @@ class Build < ApplicationRecord
   # TODO: refactor so it only uses launches for this resource
   scope :for_user, ->(user) { where(launch_id: user.launches.pluck(:id)) }
 
+  # TODO: refactor to use sql
+  scope :highest_score, -> { map { |b| b.score.to_f }.max }
+
   # passbackable
   after_create :passback_grade
 

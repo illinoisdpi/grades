@@ -5,6 +5,7 @@ class ResourcesController < ApplicationController
 
     # The URL can be saved on Resource, set by instructor, or a constant.
     @project_url = @resource.project_url
+    @builds = @resource.builds.for_user(Current.lti_provider_user).default_order
 
     if @project_url.nil?
       render plain: "Missing Project URL. Please contact course owner."
