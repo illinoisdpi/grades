@@ -1,4 +1,4 @@
 class ApplicationController < ActionController::Base
   allow_browser versions: :modern
-  include CurrentUserable
+  include Current::LtiProviderUserable
 end
