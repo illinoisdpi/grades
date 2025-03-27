@@ -37,7 +37,7 @@ module LtiProvider
       redirect_to main_app.resource_path(resource)
     end
 
-    def configure
+    def configuration
       respond_to do |format|
         format.xml do
           render xml: Launch.xml_config(lti_launch_url)
