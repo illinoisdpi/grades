@@ -39,4 +39,8 @@ class Build < ApplicationRecord
   def score
     test_output.dig("summary", "score")
   end
+
+  def to_s
+    "Build ##{id}"
+  end
 end
