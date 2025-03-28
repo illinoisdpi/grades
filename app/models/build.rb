@@ -36,6 +36,7 @@ class Build < ApplicationRecord
     end
   end
 
+  # TODO: scoreable
   def score
     test_output.dig("summary", "score")
   end

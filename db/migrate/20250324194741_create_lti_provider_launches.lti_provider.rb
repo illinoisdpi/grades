@@ -7,7 +7,7 @@ class CreateLtiProviderLaunches < ActiveRecord::Migration[4.2]
       t.text     :provider_params
 
       # TODO: can we just use the nonce?
-      # call it grade_submission_token?
+      # call it grade_runner_submission_token?
       t.string   :submission_token
 
       # TODO: add reference to resources

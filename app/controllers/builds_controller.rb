@@ -4,6 +4,7 @@ class BuildsController < ApplicationController
   def create
     launch = LtiProvider::Launch.find_by(submission_token: params[:access_token])
     resource = launch.resource
+    # TODO: set resource during a before_validation callback
     build = Build.create(build_params.merge({ launch:, resource: }))
 
     render json: {
