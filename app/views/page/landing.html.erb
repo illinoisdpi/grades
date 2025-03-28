@@ -1,3 +1,105 @@
-<%# TODO: add integration instructions here %>
-<h1>Page#landing</h1>
-<p>Find me in app/views/page/landing.html.erb</p>
+<!-- Hero Header -->
+<header class="bg-primary text-white py-5">
+  <div class="container text-center">
+    <h1 class="display-4">Canvas Auto Grading LTI</h1>
+    <p class="lead">Automate your grading workflow with RSpec tests and the <%= link_to "grade_runner", "https://github.com/DPI-WE/grade_runner", class: "text-white", target: "_blank", rel: "noopener noreferrer" %> gem.</p>
+    
+    <%# TODO: link to getting started
+      <a href="/launch" class="btn btn-light btn-lg">Get Started</a>
+    %>
+  </div>
+</header>
+
+<!-- Features Section -->
+<section id="features" class="py-5">
+  <div class="container">
+    <h2 class="mb-4 text-center">Features &amp; Benefits</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Automated Grading</h5>
+            <p class="card-text">Instantly grade assignments using RSpec tests powered by the <%= link_to "grade_runner", "https://github.com/DPI-WE/grade_runner", target: "_blank", rel: "noopener noreferrer" %> gem.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Easy Canvas Integration</h5>
+            <p class="card-text">Set up your Canvas course with external tool integrations in just a few clicks.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Transparent Feedback</h5>
+            <p class="card-text">Provide detailed feedback to students with a viewable build report and code insights.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Setup Instructions Section -->
+<section id="instructions" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="mb-4 text-center">Setup in Canvas</h2>
+    <ol class="list-group list-group-numbered">
+      <li class="list-group-item">
+        <strong>Add External App Integration:</strong> In your Canvas admin settings, add an external app integration pointing to <%= link_to '/config.xml', lti_config_path(format: :xml) %>.
+      </li>
+      <li class="list-group-item">
+        <strong>Create an Assignment with External Tool:</strong> When creating an assignment, choose the external tool option and set the launch URL to <%= link_to '/launch', lti_launch_path %>.
+      </li>
+      <li class="list-group-item">
+        <strong>Set Your Project URL:</strong> In your assignment settings, specify your repository URL (where your RSpec tests and <%= link_to "grade_runner", "https://github.com/DPI-WE/grade_runner", target: "_blank", rel: "noopener noreferrer" %> gem are located) as the Project URL.
+      </li>
+    </ol>
+    <p class="mt-3">For more details, check out our <a href="#">documentation</a>.</p>
+  </div>
+</section>
+
+<!-- TODO: Demo Video Section -->
+<%#
+<section id="demo" class="py-5">
+  <div class="container">
+    <h2 class="mb-4 text-center">Demo Video</h2>
+    <div class="ratio ratio-16x9">
+      <!-- Replace with your actual demo video embed link -->
+      <iframe src="https://www.youtube.com/embed/your_demo_video_id" title="Demo Video" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+%>
+
+<!-- TODO: Social Proof Section -->
+<%#
+<section id="social-proof" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="mb-4 text-center">What Our Users Say</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <blockquote class="blockquote">
+            <p>"This tool transformed how we handle assignments. Quick, reliable, and transparent."</p>
+            <footer class="blockquote-footer">Professor Smith, <cite title="Source Title">University of Learning</cite></footer>
+          </blockquote>
+      </div>
+      <div class="col-md-4">
+        <blockquote class="blockquote">
+          <p>"The integration was a breeze and the feedback is invaluable to my students."</p>
+          <footer class="blockquote-footer">Dr. Johnson, <cite title="Source Title">Tech Institute</cite></footer>
+        </blockquote>
+      </div>
+      <div class="col-md-4">
+        <blockquote class="blockquote">
+          <p>"I love that my students can view their build reports and even read the test code."</p>
+          <footer class="blockquote-footer">Ms. Lee, <cite title="Source Title">Modern High School</cite></footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+%>
