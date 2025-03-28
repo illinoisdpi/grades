@@ -15,8 +15,9 @@ module LtiProvider
         tool_config.extend IMS::LTI::Extensions::Canvas::ToolConfig
         platform = IMS::LTI::Extensions::Canvas::ToolConfig::PLATFORM
 
-        privacy_level = LtiProvider::XmlConfig.privacy_level || "public"
-        tool_config.send("canvas_privacy_#{privacy_level}!")
+        # TODO: do we need this? it just adds lines to /config.xml
+        # privacy_level = LtiProvider::XmlConfig.privacy_level || "public"
+        # tool_config.send("canvas_privacy_#{privacy_level}!")
 
         if LtiProvider::XmlConfig.tool_id
           tool_config.set_ext_param(platform, :tool_id, LtiProvider::XmlConfig.tool_id)

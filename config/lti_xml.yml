@@ -1,15 +1,16 @@
 # TODO: update lti values
 default: &default
-  tool_title: 'Dummy App'
-  tool_description: 'A very handy dummy application for testing LtiProvider engine integration.'
-  tool_id: 'dummy'
-  privacy_level: 'public'
-  account_navigation:
-    text: 'Dummy'
-    visibility: 'admins'
-  course_navigation:
-    text: 'Dummy'
-    visibility: 'admins'
+  tool_title: 'Canvas Auto Grading LTI'
+  tool_description: 'This LTI Tool grades programming projects by running automated tests.'
+  tool_launch_url: <%= lti_launch_url %>
+  # tool_id: 'dummy'
+  # privacy_level: 'public'
+  # account_navigation:
+  #   text: 'Dummy'
+  #   visibility: 'admins'
+  # course_navigation:
+  #   text: 'Dummy'
+  #   visibility: 'admins'
 
 development:
   <<: *default
