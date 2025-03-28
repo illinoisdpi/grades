@@ -1,0 +1,93 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      Build #<%= @build.id %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Build Details</h5>
+      <p><strong>Launch ID:</strong> <%= @build.launch_id %></p>
+      <p><strong>Resource ID:</strong> <%= @build.resource_id %></p>
+
+      <% if @build.test_output && @build.test_output["summary"] %>
+        <h6 class="mt-4">Summary</h6>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <strong>Score:</strong> <%= @build.test_output["summary"]["score"] %>
+          </li>
+          <li class="list-group-item">
+            <strong>Duration:</strong> <%= @build.test_output["summary"]["duration"] %> seconds
+          </li>
+          <li class="list-group-item">
+            <strong>Total Points:</strong> <%= @build.test_output["summary"]["total_points"] %>
+          </li>
+          <li class="list-group-item">
+            <strong>Earned Points:</strong> <%= @build.test_output["summary"]["earned_points"] %>
+          </li>
+          <li class="list-group-item">
+            <strong>Example Count:</strong> <%= @build.test_output["summary"]["example_count"] %>
+          </li>
+          <li class="list-group-item">
+            <strong>Failure Count:</strong> <%= @build.test_output["summary"]["failure_count"] %>
+          </li>
+          <li class="list-group-item">
+            <strong>Pending Count:</strong> <%= @build.test_output["summary"]["pending_count"] %>
+          </li>
+        </ul>
+      <% end %>
+
+      <% if @build.test_output && @build.test_output["examples"] %>
+        <h6 class="mt-4">Test Examples</h6>
+        <div class="accordion" id="testsAccordion">
+          <% @build.test_output["examples"].each_with_index do |example, index| %>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading<%= index %>">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>" aria-expanded="false" aria-controls="collapse<%= index %>">
+                  <%= example["description"] || "Test #{index + 1}" %>
+                  <span class="badge ms-2 <%= example["status"] == "passed" ? 'bg-success' : 'bg-danger' %>">
+                    <%= example["status"].capitalize %>
+                  </span>
+                </button>
+              </h2>
+              <div id="collapse<%= index %>" class="accordion-collapse collapse" aria-labelledby="heading<%= index %>" data-bs-parent="#testsAccordion">
+                <div class="accordion-body">
+                  <p><strong>Points:</strong> <%= example["points"] %></p>
+                  <p><strong>Run Time:</strong> <%= example["run_time"] %> seconds</p>
+                  
+                  <% if example["exception"] %>
+                    <div class="alert alert-danger">
+                      <p><strong>Exception:</strong> <%= example["exception"]["class"] %></p>
+                      <p><%= example["exception"]["message"] %></p>
+                      <% if example["exception"]["backtrace"] %>
+                        <details>
+                          <summary>Backtrace</summary>
+                          <pre><%= example["exception"]["backtrace"].join("\n") %></pre>
+                        </details>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <div class="alert alert-success">
+                      <p>No errors. Test passed successfully.</p>
+                    </div>
+                  <% end %>
+                  
+                  <p>
+                    <strong>File:</strong>
+                    <%= example["file_path"] %>
+                    (<%= example["line_number"] %>)
+                    <% if @build.resource.project_url.present? %>
+                      <%= link_to "View Code", "#{@build.resource.project_url}/blob/master/#{example['file_path']}#L#{example['line_number']}", target: "_blank", class: "btn btn-outline-primary btn-sm ms-2" %>
+                    <% end %>
+                  </p>
+                  <p><strong>Full Description:</strong> <%= example["full_description"] %></p>
+                  <% if example["hint"].present? %>
+                    <p><strong>Hint:</strong> <%= example["hint"] %></p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

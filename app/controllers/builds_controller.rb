@@ -10,6 +10,10 @@ class BuildsController < ApplicationController
     }
   end
 
+  def show
+    @build = Build.find_by(id: params[:id])
+  end
+
   private
 
   def build_params
