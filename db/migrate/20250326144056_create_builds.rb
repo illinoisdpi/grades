@@ -1,5 +1,6 @@
 class CreateBuilds < ActiveRecord::Migration[8.0]
   def change
+    # TODO: uuid
     create_table :builds do |t|
       t.references :launch, null: false, foreign_key: { to_table: :lti_provider_launches }
       t.references :resource, null: false, foreign_key: true

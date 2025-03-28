@@ -1,5 +1,6 @@
 class CreateResources < ActiveRecord::Migration[8.0]
   def change
+    # TODO: uuid
     create_table :resources do |t|
       t.string :context_id, null: false
       t.string :resource_link_id, null: false
