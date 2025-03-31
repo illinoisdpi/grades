@@ -57,13 +57,14 @@
       </li>
     </ol>
 
-    <div class="mt-8">
-      <%# TODO: set max score %>
-      <strong>Current score:</strong> <%= number_to_percentage(@builds.highest_score * 100) %>
-      <div class="mt-1 bg-gray-200 rounded h-2">
-        <div class="bg-gray-500 rounded h-2" style="width: 0%"></div>
+    <% if @builds.any? %>
+      <div class="mt-8">
+        <strong>Current score:</strong> <%= number_to_percentage(@builds.highest_score * 100) %>
+        <div class="mt-1 bg-gray-200 rounded h-2">
+          <div class="bg-gray-500 rounded h-2" style="width: 0%"></div>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 
   <%= render "builds/list_group", builds: @builds%>

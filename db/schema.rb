@@ -72,6 +72,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_144056) do
     t.citext "username"
     t.text "reponame"
     t.text "source"
+    t.float "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["launch_id"], name: "index_builds_on_launch_id"

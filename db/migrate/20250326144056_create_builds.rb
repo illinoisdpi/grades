@@ -9,6 +9,7 @@ class CreateBuilds < ActiveRecord::Migration[8.0]
       t.citext     :username
       t.text       :reponame
       t.text       :source
+      t.float      :score
 
       t.timestamps
     end
