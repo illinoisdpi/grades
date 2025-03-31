@@ -3,14 +3,19 @@ class Build < ApplicationRecord
   has_one :resource, through: :launch
   has_one :user, through: :launch
 
-  store_accessor :test_output, :version, :examples, :summary, :summary_line
+  store :test_output,
+          accessors: [
+            :examples,
+            :summary_line,
+            :summary,
+            :version ]
 
   scope :default_order, -> { order(created_at: :desc) }
   # TODO: refactor so it only uses launches for this resource
   scope :for_user, ->(user) { where(launch_id: user.launches.pluck(:id)) }
 
   # TODO: refactor to use sql
-  scope :highest_score, -> { map { |b| b.score.to_f }.max }
+  scope :highest_score, -> { map { |b| b.score.to_f }.max || 0 }
 
   # passbackable
   after_create :passback_grade
