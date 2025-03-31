@@ -4,7 +4,7 @@ require "uri"
 require "oauth/request_proxy/action_controller_request"
 
 module LtiProvider
-  module Buildable # TODO: change to initializable
+  module Initializeable
     extend ActiveSupport::Concern
 
     included do
