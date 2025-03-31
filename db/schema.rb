@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_27_222403) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_26_144056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -65,6 +65,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_27_222403) do
 
   create_table "builds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "launch_id", null: false
+    t.uuid "resource_id", null: false
+    t.uuid "lti_provider_user_id", null: false
     t.jsonb "test_output"
     t.text "commit_sha"
     t.citext "username"
@@ -73,18 +75,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_27_222403) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["launch_id"], name: "index_builds_on_launch_id"
+    t.index ["lti_provider_user_id"], name: "index_builds_on_lti_provider_user_id"
+    t.index ["resource_id"], name: "index_builds_on_resource_id"
   end
 
   create_table "lti_provider_launches", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "canvas_url"
     t.string "nonce"
-    t.jsonb "provider_params"
+    t.text "provider_params"
     t.string "submission_token"
     t.uuid "resource_id"
+    t.uuid "lti_provider_user_id"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
-    t.uuid "lti_provider_user_id"
-    t.index ["lti_provider_user_id"], name: "index_lti_provider_launches_on_lti_provider_user_id"
   end
 
   create_table "lti_provider_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -111,5 +114,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_27_222403) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "builds", "lti_provider_launches", column: "launch_id"
-  add_foreign_key "lti_provider_launches", "lti_provider_users"
+  add_foreign_key "builds", "lti_provider_users"
+  add_foreign_key "builds", "resources"
 end

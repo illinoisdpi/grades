@@ -1,7 +1,24 @@
 class Build < ApplicationRecord
+  # TODO: move to launchable?
   belongs_to :launch, class_name: "LtiProvider::Launch"
-  has_one :resource, through: :launch
-  has_one :user, through: :launch
+
+  # TODO: move to resourceable
+  belongs_to :resource
+
+  before_validation :set_resource, on: :create
+
+  def set_resource
+    self.resource ||= launch.resource
+  end
+
+  # TODO: move to userable
+  belongs_to :user, class_name: "LtiProvider::User", foreign_key: "lti_provider_user_id"
+
+  before_validation :set_user, on: :create
+
+  def set_user
+    self.user ||= launch.user
+  end
 
   store :test_output,
           accessors: [
@@ -12,7 +29,7 @@ class Build < ApplicationRecord
 
   scope :default_order, -> { order(created_at: :desc) }
   # TODO: refactor so it only uses launches for this resource
-  scope :for_user, ->(user) { where(launch_id: user.launches.pluck(:id)) }
+  scope :for_user, ->(user) { where(user:) }
 
   # TODO: refactor to use sql
   scope :highest_score, -> { map { |b| b.score.to_f }.max || 0 }
