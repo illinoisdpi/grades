@@ -5,7 +5,7 @@ class CreateLtiProviderLaunches < ActiveRecord::Migration[4.2]
     create_table :lti_provider_launches, force: true do |t|
       t.string   :canvas_url
       t.string   :nonce
-      t.text     :provider_params
+      t.jsonb    :provider_params
 
       # TODO: can we just use the nonce?
       # call it grade_runner_submission_token?
