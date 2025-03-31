@@ -1,6 +1,6 @@
 # TODO: update lti values
 default: &default
-  tool_title: 'Canvas Auto Grading LTI'
+  tool_title: 'DPI Grades'
   tool_description: 'This LTI Tool grades programming projects by running automated tests.'
   tool_launch_url: <%= lti_launch_url %>
   # tool_id: 'dummy'

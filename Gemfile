@@ -20,6 +20,7 @@ gem "importmap-rails"
 gem "ims-lti", "~> 1.2"
 gem "jbuilder"
 gem "kamal", require: false
+gem "lti_provider_engine", require: "lti_provider" # used for xml config (lti.yml, lti_xml.yml)
 gem "pg", "~> 1.5"
 gem "propshaft"
 gem "puma", ">= 5.0"
