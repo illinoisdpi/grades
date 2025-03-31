@@ -1,6 +1,6 @@
-# Canvas Auto Grading LTI
+# Grades
 
-Canvas Auto Grading LTI is a Rails-based application that automates the grading of programming assignments in Canvas. Using LTI (Learning Tools Interoperability) integration, it leverages RSpec tests and the `grade_runner` gem to run automated tests against student submissions and provide immediate, transparent feedback.
+Grades is a Canvas auto grading LTI Rails-based application that automates the grading of programming assignments in Canvas. Using LTI (Learning Tools Interoperability) integration, it leverages RSpec tests and the [grade_runner](https://github.com/DPI-WE/grade_runner) gem to run automated tests against student submissions and provide immediate, transparent feedback.
 
 ## Features
 
