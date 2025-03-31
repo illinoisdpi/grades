@@ -1,11 +1,9 @@
 class BuildsController < ApplicationController
   before_action :set_build, only: [ :show ]
+  before_action :set_launch, only: [ :create ]
 
   def create
-    launch = LtiProvider::Launch.find_by(submission_token: params[:access_token])
-    resource = launch.resource
-    # TODO: set resource during a before_validation callback
-    build = Build.create(build_params.merge({ launch:, resource: }))
+    build = Build.create(build_params.merge({ launch: @launch }))
 
     render json: {
       success: true,
@@ -28,5 +26,9 @@ class BuildsController < ApplicationController
 
   def set_build
     @build = Build.find_by(id: params[:id])
+  end
+
+  def set_launch
+    @launch = LtiProvider::Launch.find_by(submission_token: params[:access_token])
   end
 end
