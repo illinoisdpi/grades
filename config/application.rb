@@ -25,6 +25,10 @@ module Grades
     # config.eager_load_paths << Rails.root.join("extras")
     #
 
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+    end
+
     # TODO: so lti_provider_engine works with rails 8
     config.active_record.default_column_serializer = JSON
 
