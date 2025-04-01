@@ -10,8 +10,11 @@ class CreateBuilds < ActiveRecord::Migration[8.0]
       t.text       :reponame
       t.text       :source
       t.float      :score
+      t.integer    :attempt_number, null: false
 
       t.timestamps
+
+      t.index [ :resource_id, :lti_provider_user_id, :attempt_number ], unique: true
     end
   end
 end

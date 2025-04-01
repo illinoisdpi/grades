@@ -2,8 +2,7 @@
   <% builds.each do |build| %>
     <%= link_to build_path(build), class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center" do %>
       <div>
-        <%# TODO: make a friendly_id indexed by resource/user %>
-        <h5 class="mb-1">Build #<%= build.id %></h5>
+        <h5 class="mb-1">Build #<%= build.attempt_number %></h5>
         <p class="mb-1">
           <strong>Summary:</strong> <%= build.summary_line %>
         </p>

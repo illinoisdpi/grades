@@ -1,5 +1,5 @@
 class Build < ApplicationRecord
-  include Launchable, Passbackable, Resourceable, Scoreable, Userable
+  include AttemptNumberable, Launchable, Passbackable, Resourceable, Scoreable, Userable
 
   store_accessor :test_output,
    :examples,

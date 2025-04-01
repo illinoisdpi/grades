@@ -73,10 +73,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_144056) do
     t.text "reponame"
     t.text "source"
     t.float "score"
+    t.integer "attempt_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["launch_id"], name: "index_builds_on_launch_id"
     t.index ["lti_provider_user_id"], name: "index_builds_on_lti_provider_user_id"
+    t.index ["resource_id", "lti_provider_user_id", "attempt_number"], name: "idx_on_resource_id_lti_provider_user_id_attempt_num_04d6705cd7", unique: true
     t.index ["resource_id"], name: "index_builds_on_resource_id"
   end
 
