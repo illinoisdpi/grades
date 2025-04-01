@@ -12,26 +12,26 @@ Grades is a Canvas auto grading LTI Rails-based application that automates the g
 
 ## Installation
 
-1. **Clone the Repository:**
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/dpi-pttl/canvas-auto-grading-lti.git
 cd canvas-auto-grading-lti
 ```
 
-2. Install Dependencies:
+### 2. Install Dependencies
 
 ```bash
 bundle install
 ```
 
-3. Setup the Database:
+### 3. Setup the Database
 
 ```bash
 rails db:create db:migrate db:seed
 ```
 
-4. Start the Server:
+### 4. Start the Server
 
 ```bash
 rails server
@@ -40,6 +40,7 @@ rails server
 Visit http://localhost:3000 in your browser to see the landing page.
 
 ## Development: Testing LTI Integration Locally
+
 When developing and testing LTI integration, Canvas (or any external system) must be able to reach your local server. You can achieve this by:
 
 - Using GitHub Codespaces: If you're using Codespaces, use the provided public URL to test the LTI integration.
@@ -52,48 +53,51 @@ ngrok http 3000
 Ngrok will provide a public URL (e.g., https://abcd1234.ngrok.io). Use this URL when setting up external tool configurations in Canvas.
 
 ## Canvas Integration Instructions
+
 To set up the auto grading tool with Canvas, follow these steps:
 
-### Add External App Integration:
+### Add External App Integration
 
 In your Canvas Admin settings, add an external app integration pointing to:
 
 `https://yourdomain.com/config.xml`
 
-### Create an Assignment with External Tool:
+### Create an Assignment with External Tool
 
 When creating an assignment in Canvas, select "External Tool" as the submission type and set the Launch URL to:
 
 `https://yourdomain.com/launch`
 
-### Set Your Project URL:
+### Set Your Project URL
 
 In the assignment settings, specify the Project URL as your repository URL. This should point to the repo that contains your RSpec tests and the grade_runner gem configuration.
 
 ## How It Works
 
-### Educator Workflow:
+### Educator Workflow
 
 - Configure the LTI integration in Canvas.
 - Create assignments that launch the auto grader.
 - Review student build reports and provide feedback based on the automated test results.
 
-### Student Workflow:
+### Student Workflow
 
 - Launch the assignment via Canvas.
 - View a detailed build report with a list of failing tests.
 - Optionally, click links (constructed from file paths, line numbers, and the project repo URL) to review the corresponding test code.
 
 ## Contributing
+
 Contributions are welcome! To contribute:
 
-- Fork the repository.
-- Create a feature branch.
+- Create a feature branch (`<issue-number>-<initials>-<feature-title>`).
 - Commit your changes.
 - Open a pull request.
 
 ## License
+
 This project is licensed under the MIT License.
 
 ## Contact
+
 For questions or feedback, please open an issue on GitHub.
