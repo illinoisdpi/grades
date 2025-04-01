@@ -67,7 +67,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_144056) do
     t.uuid "launch_id", null: false
     t.uuid "resource_id", null: false
     t.uuid "lti_provider_user_id", null: false
-    t.jsonb "test_output"
+    t.jsonb "test_output", default: "{}", null: false
     t.text "commit_sha"
     t.citext "username"
     t.text "reponame"
@@ -83,7 +83,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_144056) do
   create_table "lti_provider_launches", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "canvas_url"
     t.string "nonce"
-    t.text "provider_params"
+    t.jsonb "provider_params", default: "{}", null: false
     t.string "submission_token"
     t.uuid "resource_id"
     t.uuid "lti_provider_user_id"

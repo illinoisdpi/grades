@@ -4,7 +4,7 @@ class CreateBuilds < ActiveRecord::Migration[8.0]
       t.references :launch, null: false, foreign_key: { to_table: :lti_provider_launches }, type: :uuid
       t.references :resource, null: false, foreign_key: { to_table: :resources }, type: :uuid
       t.references :lti_provider_user, null: false, foreign_key: { to_table: :lti_provider_users }, type: :uuid
-      t.jsonb      :test_output
+      t.jsonb      :test_output, null: false, default: '{}'
       t.text       :commit_sha
       t.citext     :username
       t.text       :reponame

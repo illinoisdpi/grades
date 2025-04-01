@@ -1,12 +1,11 @@
 class Build < ApplicationRecord
   include Launchable, Passbackable, Resourceable, Scoreable, Userable
 
-  store :test_output,
-          accessors: [
-            :examples,
-            :summary_line,
-            :summary,
-            :version ]
+  store_accessor :test_output,
+   :examples,
+   :summary_line,
+   :summary,
+   :version
 
   scope :default_order, -> { order(created_at: :desc) }
 
