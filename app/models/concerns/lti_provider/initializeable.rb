@@ -21,7 +21,6 @@ module LtiProvider
         :custom_canvas_course_id,
         :custom_canvas_module_id,
         :custom_canvas_module_item_id,
-        :custom_canvas_user_id,
         :custom_canvas_user_login_id,
         :custom_canvas_workflow_state,
         :ext_ims_lis_basic_outcome_url,

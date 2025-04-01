@@ -94,14 +94,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_144056) do
   end
 
   create_table "lti_provider_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "canvas_user_id"
+    t.text "tool_consumer_instance_name"
+    t.text "lis_person_name_given"
+    t.text "lis_person_name_family"
     t.text "lis_person_name_full"
     t.text "lis_user_id"
-    t.citext "lis_person_contact_email_primary"
-    t.text "user_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["canvas_user_id"], name: "index_lti_provider_users_on_canvas_user_id"
     t.index ["lis_user_id"], name: "index_lti_provider_users_on_lis_user_id"
   end
 

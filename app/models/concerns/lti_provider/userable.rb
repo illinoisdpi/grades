@@ -8,15 +8,14 @@ module LtiProvider
     end
 
     def assign_user
-      canvas_user_id = provider_params["custom_canvas_user_id"]
       lis_user_id = provider_params["user_id"]
-      return if canvas_user_id.blank? && lis_user_id.blank?
+      return if lis_user_id.blank?
 
-      self.user ||= User.find_or_create_by(canvas_user_id: canvas_user_id) do |u|
+      self.user ||= User.find_or_create_by(lis_user_id:) do |u|
+        u.tool_consumer_instance_name      = provider_params["tool_consumer_instance_name"]
+        u.lis_person_name_given            = provider_params["lis_person_name_given"]
+        u.lis_person_name_family           = provider_params["lis_person_name_family"]
         u.lis_person_name_full             = provider_params["lis_person_name_full"]
-        u.lis_user_id                      = provider_params["user_id"]
-        u.lis_person_contact_email_primary = provider_params["lis_person_contact_email_primary"]
-        u.user_image                       = provider_params["user_image"]
       end
     end
   end
