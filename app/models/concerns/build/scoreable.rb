@@ -1,11 +1,9 @@
 module Build::Scoreable
   extend ActiveSupport::Concern
 
-  # TODO: validate score in range 0.0 -> 1.0
-
   included do
     before_validation :set_score
-
+    validates :score, numericality: { in: 0.0..1.0 }
     scope :highest_score, -> { maximum(:score) }
   end
 
