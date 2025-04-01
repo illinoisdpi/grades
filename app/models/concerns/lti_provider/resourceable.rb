@@ -4,7 +4,7 @@ module LtiProvider
 
     included do
       belongs_to :resource
-      before_validation :set_resource
+      before_validation :set_resource, on: :create
     end
 
     def set_resource
