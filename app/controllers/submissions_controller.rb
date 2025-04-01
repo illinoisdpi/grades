@@ -22,7 +22,7 @@ class SubmissionsController < ApplicationController
     # }
     #
 
-    # TODO: # TODO: hook up storage to github repo to set values dynamically
+    # TODO: hook up storage to github repo to set values dynamically to ensure valid build
     render json: {
       success: true,
       repo_slug: "TODO",
