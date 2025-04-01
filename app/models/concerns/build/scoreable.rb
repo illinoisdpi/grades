@@ -5,6 +5,7 @@ module Build::Scoreable
     before_validation :set_score
     validates :score, numericality: { in: 0.0..1.0 }
     scope :highest_score, -> { maximum(:score) }
+    scope :with_max_score, -> { order(score: :desc).limit(1) }
   end
 
   def set_score
