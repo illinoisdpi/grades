@@ -13,6 +13,9 @@ module Build::Passbackable
       return
     end
 
+    # Passback the highest grade for resource
+    # This way students can experiment, reset the project, etc. without fear of losing progress
+    # If there is an issue, running rake grade will sync up canvas with highest score in build history
     build = Build.for_user(user).for_resource(resource).with_max_score.first
 
     unless build
