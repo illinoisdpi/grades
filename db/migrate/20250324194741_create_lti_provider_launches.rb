@@ -4,10 +4,7 @@ class CreateLtiProviderLaunches < ActiveRecord::Migration[4.2]
       t.string   :canvas_url
       t.string   :nonce
       t.jsonb    :provider_params, null: false, default: '{}'
-
-      # TODO: can we just use the nonce?
-      # call it grade_runner_submission_token?
-      t.string :submission_token
+      t.string :submission_token # NOTE: used by grade_runner gem when submitting build
       t.references :resource, type: :uuid
       t.references :lti_provider_user, type: :uuid
 

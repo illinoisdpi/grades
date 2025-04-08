@@ -5,6 +5,7 @@ Rails.application.configure do
 
   # TODO: handle ngrok in a better way
   config.hosts << /.*\.ngrok-free\.app/
+
   # TODO: handle another way for lti_engine
   config.action_controller.allow_forgery_protection = false
 
