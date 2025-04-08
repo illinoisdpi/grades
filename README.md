@@ -86,12 +86,47 @@ In the assignment settings, specify the Project URL as your repository URL. This
 - View a detailed build report with a list of failing tests.
 - Optionally, click links (constructed from file paths, line numbers, and the project repo URL) to review the corresponding test code.
 
+## Testing
+
+### Running RSpec Tests
+
+We use RSpec for testing. To run all tests:
+
+```bash
+bundle exec rspec
+```
+
+To run specific test files:
+
+```bash
+bundle exec rspec spec/models/resource_spec.rb
+```
+
+### Swagger Documentation
+
+The API is documented using Swagger through rswag. Tests in the `spec/requests` directory are used to generate Swagger documentation.
+
+To generate Swagger documentation:
+
+```bash
+bundle exec rake rswag:specs:swaggerize
+```
+
+The documentation will be generated in `swagger/v1/swagger.yaml`.
+
+To view the Swagger documentation, start the Rails server and visit:
+
+<http://localhost:3000/api-docs>
+
 ## Contributing
 
 Contributions are welcome! To contribute:
 
 - Create a feature branch (`<issue-number>-<initials>-<feature-title>`).
 - Commit your changes.
+- Add specs for new features.
+- Ensure all tests pass with `bundle exec rspec`.
+- Generate updated Swagger docs with `bundle exec rake rswag:specs:swaggerize`.
 - Open a pull request.
 
 ## License

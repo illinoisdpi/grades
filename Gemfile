@@ -4,6 +4,8 @@ group :development, :test do
   gem "brakeman", require: false
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "rubocop-rails-omakase", require: false
+  gem "rspec-rails"
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -13,6 +15,9 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  gem "shoulda-matchers"
+  gem "rails-controller-testing"
+  gem "rswag-specs"
 end
 
 gem "bootsnap", require: false
@@ -33,3 +38,5 @@ gem "stimulus-rails"
 gem "thruster", require: false
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "rswag-api"
+gem "rswag-ui"

@@ -1,0 +1,334 @@
+---
+openapi: 3.0.1
+info:
+  title: Grades API
+  version: v1
+  description: API documentation for the Grades application
+paths:
+  "/builds/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: Build ID
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieves a build
+      tags:
+      - Builds
+      responses:
+        '200':
+          description: build found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/build"
+            application/html:
+              schema:
+                "$ref": "#/components/schemas/build"
+        '404':
+          description: build not found
+  "/builds":
+    post:
+      summary: Creates a build
+      tags:
+      - Builds
+      parameters: []
+      responses:
+        '200':
+          description: build created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  url:
+                    type: string
+                required:
+                - success
+                - url
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                access_token:
+                  type: string
+                commit_sha:
+                  type: string
+                username:
+                  type: string
+                reponame:
+                  type: string
+                source:
+                  type: string
+                test_output:
+                  type: object
+                  properties:
+                    examples:
+                      type: array
+                      items:
+                        type: object
+                    summary_line:
+                      type: string
+                    summary:
+                      type: object
+                    version:
+                      type: string
+              required:
+              - access_token
+  "/launch":
+    post:
+      summary: Launches the LTI application
+      tags:
+      - LTI
+      parameters: []
+      responses:
+        '200':
+          description: LTI application launched
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+        required: true
+  "/config":
+    get:
+      summary: Retrieves LTI configuration XML
+      tags:
+      - LTI
+      responses:
+        '200':
+          description: LTI configuration
+  "/":
+    get:
+      summary: Landing page
+      tags:
+      - Page
+      responses:
+        '200':
+          description: landing page
+  "/resources":
+    get:
+      summary: Lists all resources
+      tags:
+      - Resources
+      responses:
+        '200':
+          description: resources list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/resource"
+            application/html:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/resource"
+    post:
+      summary: Creates a resource
+      tags:
+      - Resources
+      parameters: []
+      responses:
+        '201':
+          description: resource created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                context_id:
+                  type: string
+                resource_link_id:
+                  type: string
+                project_url:
+                  type: string
+              required:
+              - context_id
+              - resource_link_id
+  "/resources/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: Resource ID
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieves a resource
+      tags:
+      - Resources
+      responses:
+        '200':
+          description: resource found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/resource"
+            application/html:
+              schema:
+                "$ref": "#/components/schemas/resource"
+        '404':
+          description: resource not found
+    put:
+      summary: Updates a resource
+      tags:
+      - Resources
+      parameters: []
+      responses:
+        '302':
+          description: resource updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_url:
+                  type: string
+    delete:
+      summary: Deletes a resource
+      tags:
+      - Resources
+      responses:
+        '204':
+          description: resource deleted
+        '404':
+          description: resource not found
+  "/resources/{id}/edit":
+    parameters:
+    - name: id
+      in: path
+      description: Resource ID
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Resource edit form
+      tags:
+      - Resources
+      responses:
+        '200':
+          description: edit form
+  "/submissions/validate_token":
+    get:
+      summary: Validates a submission token
+      tags:
+      - Submissions
+      parameters:
+      - name: token
+        in: query
+        required: true
+        description: Submission token to validate
+        schema:
+          type: string
+      responses:
+        '200':
+          description: token validation status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                required:
+                - success
+  "/submissions/resource":
+    get:
+      summary: Retrieves resource information for a submission
+      tags:
+      - Submissions
+      responses:
+        '200':
+          description: resource information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  repo_slug:
+                    type: string
+                  spec_folder_sha:
+                    type: string
+                  source_code_url:
+                    type: string
+                required:
+                - success
+                - repo_slug
+                - spec_folder_sha
+                - source_code_url
+components:
+  schemas:
+    resource:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        context_id:
+          type: string
+        resource_link_id:
+          type: string
+        project_url:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - context_id
+      - resource_link_id
+    build:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        resource_id:
+          type: string
+          format: uuid
+        launch_id:
+          type: string
+          format: uuid
+        lti_provider_user_id:
+          type: string
+          format: uuid
+        test_output:
+          type: object
+        commit_sha:
+          type: string
+        username:
+          type: string
+        reponame:
+          type: string
+        source:
+          type: string
+        score:
+          type: number
+          format: float
+        attempt_number:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+servers:
+- url: http://localhost:3000
+  description: Development server
