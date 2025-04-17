@@ -28,7 +28,12 @@ test:
 production:
   primary:
     <<: *default
-    database: grades_production
+    host: <%= ENV["PGHOST"] %>
+    username: <%= ENV["PGUSER"] %>
+    password: <%= ENV["PGPASSWORD"] %>
+    port: <%= ENV.fetch("PGPORT", 5432) %>
+    database: <%= ENV["PGDATABASE"] %>
+    sslmode: <%= ENV.fetch("PGSSLMODE", "require") %>
   # cache:
   #   <<: *default
   #   database: storage/production_cache.sqlite3
