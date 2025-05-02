@@ -28,12 +28,11 @@ test:
 production:
   primary:
     <<: *default
-    host: <%= ENV["PGHOST"] %>
-    username: <%= ENV["PGUSER"] %>
-    password: <%= ENV["PGPASSWORD"] %>
-    port: <%= ENV.fetch("PGPORT", 5432) %>
-    database: <%= ENV["PGDATABASE"] %>
-    sslmode: <%= ENV.fetch("PGSSLMODE", "require") %>
+    url: <%= ENV['DATABASE_URL'] %>
+  queue:
+    <<: *default
+    url: <%= ENV['DATABASE_URL']&.sub(/_primary$/, '_queue') %>
+    migrations_paths: db/queue_migrate
   # cache:
   #   <<: *default
   #   database: storage/production_cache.sqlite3
