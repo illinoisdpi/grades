@@ -1,6 +1,7 @@
 class BuildsController < ApplicationController
   before_action :set_build, only: [ :show ]
   before_action :set_launch, only: [ :create ]
+  skip_forgery_protection only: :create
 
   def create
     build = Build.create(build_params.merge({ launch: @launch }))
