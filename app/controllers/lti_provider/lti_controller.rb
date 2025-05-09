@@ -2,6 +2,7 @@ module LtiProvider
   class LtiController < ApplicationController
     before_action :set_provider, only: [ :launch ]
     before_action :set_launch, only: [ :launch ]
+    skip_forgery_protection only: :launch
 
     def launch
       if @launch.save
