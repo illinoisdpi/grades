@@ -25,6 +25,7 @@ test:
 
 # Store production database in the storage/ directory, which by default
 # is mounted as a persistent Docker volume in config/deploy.yml.
+# NOTE: do we need `&.sub(/_primary$/, '_queue')` in the url?
 production:
   primary:
     <<: *default
