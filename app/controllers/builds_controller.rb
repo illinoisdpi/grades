@@ -14,8 +14,8 @@ class BuildsController < ApplicationController
 
   def show
     @breadcrumbs = [
-      { content: @build.resource.to_s, href: resource_path(@build.resource) },
-      { content: @build.to_s }
+      { content: @build.resource.to_breadcrumb_s, href: resource_path(@build.resource) },
+      { content: @build.to_breadcrumb_s }
     ]
   end
 
