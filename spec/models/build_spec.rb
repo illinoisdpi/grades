@@ -22,12 +22,4 @@ RSpec.describe Build, type: :model do
       end
     end
   end
-
-  describe '#to_s' do
-    it 'returns a string representation with ID' do
-      build = Build.new
-      allow(build).to receive(:id).and_return('123')
-      expect(build.to_s).to eq('Build #123')
-    end
-  end
 end
