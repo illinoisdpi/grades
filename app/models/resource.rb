@@ -11,7 +11,7 @@ class Resource < ApplicationRecord
     URI.parse(project_url).path[1..]
   end
 
-  def to_s
-    "Resource ##{id}: #{project_path}"
+  def to_breadcrumb_s
+    project_path
   end
 end

@@ -9,7 +9,7 @@ class Build < ApplicationRecord
 
   scope :default_order, -> { order(created_at: :desc) }
 
-  def to_s
-    "Build ##{id}"
+  def to_breadcrumb_s
+    "Build ##{attempt_number}"
   end
 end
