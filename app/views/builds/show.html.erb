@@ -12,7 +12,7 @@
         <h6 class="mt-4">Summary</h6>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <strong>Score:</strong> <%= @build.test_output["summary"]["score"] %>
+            <strong>Score:</strong> <%= (@build.score * 100).to_fs(:percentage) %>
           </li>
           <li class="list-group-item">
             <strong>Duration:</strong> <%= @build.test_output["summary"]["duration"] %> seconds
