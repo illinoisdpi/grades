@@ -15,8 +15,8 @@ Grades is a Canvas auto grading LTI Rails-based application that automates the g
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/dpi-pttl/canvas-auto-grading-lti.git
-cd canvas-auto-grading-lti
+git clone https://github.com/dpi-tta/grades.git
+cd grades
 ```
 
 ### 2. Install Dependencies
