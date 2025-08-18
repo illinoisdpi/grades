@@ -6,7 +6,7 @@
 
     <ol class="space-y-6 list-decimal ml-4 text-gray-700">
       <li>
-        <strong>Fork the project</strong> —
+        <strong>Fork the project</strong>:
         <a href="<%= @resource.project_url %>/fork" target="_blank">Click here copy the starter code to your own account.</a><br>
         <span class="text-sm text-gray-500">
           Only fork <strong>once</strong> per project. If you already forked, find your project at:
@@ -15,25 +15,22 @@
       </li>
 
       <li>
-        <strong>Set up your Integrated Development Environment</strong> —
-        Create an IDE with which to write and preview your code:
+        <strong>Set up your IDE (Integrated Development Environment)</strong>: Create an IDE to write and preview your code:
         <ul class="list-disc ml-4">
           <li>
+            <%# TODO: add instruction to create codespace on main %>
             <a href="https://github.com/codespaces" target="_blank">Codespaces</a><br>
-            <span class="text-sm text-gray-500">If you already opened a codespace, reopen it at:</span><br>
-            <code class="bg-gray-100 p-1 rounded">github.com/codespaces</code>
           </li>
         </ul>
       </li>
 
       <li>
-        <strong>Read the lesson</strong> —
-        <a href="<%= @resource.project_url %>" target="_blank">Click here for the written lesson.</a>
+        <strong>Read the project README</strong>:
+        <a href="<%= @resource.project_url %>" target="_blank">Click here for the project README with instructions.</a>
       </li>
 
       <li>
-        <strong>Automated feedback</strong> —
-        When you're ready to get feedback, run this in your terminal:
+        <strong>Automated grading feedback</strong>: When you're ready to get feedback, run this in your terminal:
         <div class="mt-2">
           <code class="bg-gray-200 p-2 rounded font-mono">rake grade</code>
         </div>
@@ -42,24 +39,20 @@
         </p>
 
         <p class="mt-3">
-          When asked for your access token, carefully copy and paste:
+          <%# TODO: add auto copy snippet button %>
+          You may be asked for an access token when running <code>rake grade</code>. When this happens copy and paste: <code class="bg-gray-200 p-2 rounded font-mono"><%= @launch.submission_token %></code>
         </p>
-
-        <%# TODO: add auto copy snippet button %>
-        <div class="mt-2">
-          <code class="bg-gray-200 p-2 rounded font-mono"><%= @launch.submission_token %></code>
-        </div>
 
         <p class="text-sm mt-3 text-gray-500">
-          If you used the wrong token, reset by running:
+          You can reset your access token by running: <code class="bg-gray-200 p-2 rounded font-mono">rake grade:reset_token</code>
         </p>
-        <code class="bg-gray-200 p-2 rounded font-mono">rake grade:reset_token</code>
+        
       </li>
     </ol>
 
     <% if @builds.any? %>
       <div class="mt-8">
-        <strong>Current score:</strong> <%= number_to_percentage(@builds.highest_score * 100) %>
+        <strong>Current score:</strong> <%= number_to_percentage((@builds.highest_score * 100), precision: 0) %>
         <div class="mt-1 bg-gray-200 rounded h-2">
           <div class="bg-gray-500 rounded h-2" style="width: 0%"></div>
         </div>
